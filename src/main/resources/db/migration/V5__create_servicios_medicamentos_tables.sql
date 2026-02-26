@@ -1,0 +1,13 @@
+CREATE TABLE servicios(
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    descripcion TEXT,
+    precio DECIMAL(10,2) NOT NULL DEFAULT 0.00
+);
+
+CREATE TABLE medicamentos(
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    stock INTEGER NOT NULL DEFAULT 0,
+    precio_venta DECIMAL(10,2) NOT NULL DEFAULT 0.0
+);
