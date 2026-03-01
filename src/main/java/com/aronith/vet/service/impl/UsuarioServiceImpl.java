@@ -1,6 +1,7 @@
 package com.aronith.vet.service.impl;
 
 import com.aronith.vet.dto.request.UsuarioRequestDTO;
+import com.aronith.vet.dto.response.ClienteResponseDTO;
 import com.aronith.vet.dto.response.UsuarioResponseDTO;
 import com.aronith.vet.model.Usuario;
 import com.aronith.vet.repository.UsuarioRepository;
@@ -28,10 +29,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
 
-        return new UsuarioResponseDTO(
-                usuarioGuardado.getUsername(),
-                usuarioGuardado.getEmail()
-        );
+        return mapearADto(usuarioGuardado);
     }
 
     @Override
@@ -46,6 +44,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Boolean existsByEmail(String email) {
         return usuarioRepository.existsByEmail(email);
+    }
+
+    private UsuarioResponseDTO mapearADto(Usuario usuario) {
+        return new UsuarioResponseDTO(
+                usuario.getUsername(),
+                usuario.getEmail()
+        );
     }
 
 }

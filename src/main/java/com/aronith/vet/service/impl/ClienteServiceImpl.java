@@ -43,14 +43,7 @@ public class ClienteServiceImpl implements ClienteService {
 
         Cliente clienteGuardado = clienteRepository.save(cliente);
 
-        return new ClienteResponseDTO(
-                clienteGuardado.getNombre(),
-                clienteGuardado.getApellido(),
-                clienteGuardado.getDni(),
-                clienteGuardado.getTelefono(),
-                clienteGuardado.getEmail(),
-                clienteGuardado.getDireccion()
-        );
+        return mapearADto(clienteGuardado);
 
     }
 
@@ -87,6 +80,12 @@ public class ClienteServiceImpl implements ClienteService {
                 .stream()
                 .map(this::mapearADto)
                 .toList();
+    }
+
+    @Override
+    public Cliente obtenerPorId(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
     }
 
     private ClienteResponseDTO mapearADto(Cliente c) {

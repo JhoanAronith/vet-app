@@ -47,6 +47,12 @@ public class RazaServiceImpl implements RazaService {
                 .toList();
     }
 
+    @Override
+    public Raza obtenerPorId(Long id) {
+        return razaRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Raza no encontrada"));
+    }
+
     private RazaResponseDTO mapearADto(Raza raza) {
         return new RazaResponseDTO(
                 raza.getId(),
