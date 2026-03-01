@@ -71,6 +71,12 @@ public class MascotaServiceImpl implements MascotaService {
                 });
     }
 
+    @Override
+    public Mascota buscarMascotaPorId(Long id) {
+        return mascotaRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Mascota no encontrada"));
+    }
+
     private MascotaResponseDTO mapearADto(Mascota mascota) {
         return new MascotaResponseDTO(
                 mascota.getNombre(),
