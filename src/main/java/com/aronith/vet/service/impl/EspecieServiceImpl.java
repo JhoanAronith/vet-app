@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,12 @@ public class EspecieServiceImpl implements EspecieService {
                 .stream()
                 .map(this::mapearADto)
                 .toList();
+    }
+
+    @Override
+    public Especie obtenerPorId(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Especie no encontrada"));
     }
 
     private EspecieResponseDTO mapearADto(Especie especie) {
