@@ -1,0 +1,31 @@
+package com.aronith.vet.controller;
+
+import com.aronith.vet.dto.request.UsuarioRequestDTO;
+import com.aronith.vet.dto.response.UsuarioResponseDTO;
+import com.aronith.vet.service.UsuarioService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/usuario")
+@AllArgsConstructor
+public class UsuarioController {
+
+    private final UsuarioService usuarioService;
+
+    @PostMapping("/guardar")
+    public ResponseEntity<UsuarioResponseDTO> guardarUsuario(@RequestBody UsuarioRequestDTO dto) {
+        UsuarioResponseDTO response = usuarioService.guardar(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/buscar/{email}")
+    public ResponseEntity<UsuarioResponseDTO> buscarUsuario(@PathVariable String email) {
+        return usuarioService.findByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+}
