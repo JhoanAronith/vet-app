@@ -79,6 +79,7 @@ public class MascotaServiceImpl implements MascotaService {
 
     private MascotaResponseDTO mapearADto(Mascota mascota) {
         return new MascotaResponseDTO(
+                mascota.getId(),
                 mascota.getNombre(),
                 mascota.getFechaNacimiento(),
                 mascota.getGenero(),

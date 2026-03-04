@@ -38,6 +38,7 @@ public class ServicioServiceImpl implements ServicioService {
 
     private ServicioResponseDTO mapearADto(Servicio servicio) {
         return new ServicioResponseDTO(
+                servicio.getId(),
                 servicio.getNombre(),
                 servicio.getDescripcion(),
                 servicio.getPrecio()

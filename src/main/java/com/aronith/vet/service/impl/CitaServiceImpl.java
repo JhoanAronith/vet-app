@@ -90,6 +90,7 @@ public class CitaServiceImpl implements CitaService {
 
     private CitaResponseDTO mapearADto(Cita cita) {
         return new CitaResponseDTO(
+                cita.getId(),
                 cita.getFechaHora(),
                 cita.getMotivo(),
                 cita.getEstado(),

@@ -90,6 +90,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     private ClienteResponseDTO mapearADto(Cliente c) {
         return new ClienteResponseDTO(
+                c.getId(),
                 c.getNombre(),
                 c.getApellido(),
                 c.getDni(),

@@ -3,6 +3,7 @@ package com.aronith.vet.dto.response;
 import java.time.LocalDate;
 
 public record MascotaResponseDTO (
+        Long id,
         String nombre,
         LocalDate fechaNacimiento,
         String genero,
