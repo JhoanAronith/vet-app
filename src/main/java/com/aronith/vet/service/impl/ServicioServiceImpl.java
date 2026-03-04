@@ -3,7 +3,7 @@ package com.aronith.vet.service.impl;
 import com.aronith.vet.dto.request.ServicioRequestDTO;
 import com.aronith.vet.dto.response.ServicioResponseDTO;
 import com.aronith.vet.model.Servicio;
-import com.aronith.vet.repository.ServicioReposiroty;
+import com.aronith.vet.repository.ServicioRepository;
 import com.aronith.vet.service.ServicioService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ServicioServiceImpl implements ServicioService {
 
-    private final ServicioReposiroty servicioReposiroty;
+    private final ServicioRepository servicioReposiroty;
 
     @Override
     public ServicioResponseDTO guardar(ServicioRequestDTO dto) {
