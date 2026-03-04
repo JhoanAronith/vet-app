@@ -1,0 +1,43 @@
+package com.aronith.vet.controller;
+
+import com.aronith.vet.dto.request.VisitaRequestDTO;
+import com.aronith.vet.dto.response.VisitaResponseDTO;
+import com.aronith.vet.service.VisitaService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/visita")
+@RequiredArgsConstructor
+public class VisitaController {
+
+    private final VisitaService visitaService;
+
+    @PostMapping("/guardar")
+    public ResponseEntity<VisitaResponseDTO> crear(@RequestBody VisitaRequestDTO request) {
+        return new ResponseEntity<>(visitaService.crearVisita(request), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<VisitaResponseDTO> obtenerPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(visitaService.obtenerPorId(id));
+    }
+
+    @GetMapping("/mascota/{idMascota}")
+    public ResponseEntity<List<VisitaResponseDTO>> listarPorMascota(@PathVariable Long idMascota) {
+        return ResponseEntity.ok(visitaService.listarPorMascota(idMascota));
+    }
+
+    @GetMapping("/fechas")
+    public ResponseEntity<List<VisitaResponseDTO>> listarPorFechas(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fin) {
+        return ResponseEntity.ok(visitaService.listarPorRangoDeFechas(inicio, fin));
+    }
+}
