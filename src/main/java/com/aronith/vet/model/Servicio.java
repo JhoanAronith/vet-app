@@ -8,10 +8,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "servicios")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class Servicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
