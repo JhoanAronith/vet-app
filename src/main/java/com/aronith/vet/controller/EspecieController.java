@@ -3,6 +3,7 @@ package com.aronith.vet.controller;
 import com.aronith.vet.dto.request.EspecieRequestDTO;
 import com.aronith.vet.dto.response.EspecieResponseDTO;
 import com.aronith.vet.service.EspecieService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/especie")
 @AllArgsConstructor
+@Tag(name = "Especies", description = "Operaciones sobre especies.")
 public class EspecieController {
 
     private final EspecieService especieService;

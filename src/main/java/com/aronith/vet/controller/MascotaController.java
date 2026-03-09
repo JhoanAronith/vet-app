@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.ClienteResumenDto;
 import com.aronith.vet.dto.response.MascotaResponseDTO;
 import com.aronith.vet.dto.response.RazaResponseDTO;
 import com.aronith.vet.service.MascotaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/mascota")
 @AllArgsConstructor
+@Tag(name = "Mascotas", description = "Operaciones sobre mascotas.")
 public class MascotaController {
 
     private final MascotaService mascotaService;

@@ -3,6 +3,7 @@ package com.aronith.vet.controller;
 import com.aronith.vet.dto.request.RazaRequestDTO;
 import com.aronith.vet.dto.response.RazaResponseDTO;
 import com.aronith.vet.service.RazaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/raza")
 @AllArgsConstructor
+@Tag(name = "Razas", description = "Operaciones sobre razas.")
 public class RazaController {
 
     private final RazaService razaService;

@@ -4,6 +4,7 @@ import com.aronith.vet.dto.request.ClienteRequestDTO;
 import com.aronith.vet.dto.response.ClienteResponseDTO;
 import com.aronith.vet.dto.response.MascotaResumenDTO;
 import com.aronith.vet.service.ClienteService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cliente")
 @AllArgsConstructor
+@Tag(name = "Clientes", description = "Operaciones sobre clientes.")
 public class ClienteController {
 
     private final ClienteService clienteService;

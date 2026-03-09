@@ -3,6 +3,7 @@ package com.aronith.vet.controller;
 import com.aronith.vet.dto.request.CitaRequestDTO;
 import com.aronith.vet.dto.response.CitaResponseDTO;
 import com.aronith.vet.service.CitaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cita")
 @AllArgsConstructor
+@Tag(name = "Citas", description = "Operaciones sobre citas.")
 public class CitaController {
 
     private final CitaService citaService;
