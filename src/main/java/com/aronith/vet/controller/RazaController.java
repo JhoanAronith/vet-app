@@ -3,6 +3,8 @@ package com.aronith.vet.controller;
 import com.aronith.vet.dto.request.RazaRequestDTO;
 import com.aronith.vet.dto.response.RazaResponseDTO;
 import com.aronith.vet.service.RazaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +15,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/raza")
 @AllArgsConstructor
+@Tag(name = "Razas", description = "Operaciones sobre razas.")
 public class RazaController {
 
     private final RazaService razaService;
 
+    @Operation(summary = "Guardar una nueva raza en la base de datos")
     @PostMapping("/guardar")
     public ResponseEntity<RazaResponseDTO> guardarRaza(@RequestBody RazaRequestDTO dto) {
         RazaResponseDTO response = razaService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Obtener una lista de todas las razas registradas")
     @GetMapping("/listar")
     public ResponseEntity<List<RazaResponseDTO>> listarTodos() {
         return ResponseEntity.ok(razaService.findAll());
     }
 
+    @Operation(summary = "Obtener todas las razas que pertenecen a una especie")
     @GetMapping("/buscar/{idEspecie}")
     public ResponseEntity<List<RazaResponseDTO>> buscarPorEspecieId(@PathVariable Long idEspecie) {
         List<RazaResponseDTO> razas = razaService.findByEspecieId(idEspecie);
