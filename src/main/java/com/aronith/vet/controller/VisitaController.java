@@ -21,21 +21,25 @@ public class VisitaController {
 
     private final VisitaService visitaService;
 
+    @Operation(summary = "Guardar una visita en la base de datos")
     @PostMapping("/guardar")
     public ResponseEntity<VisitaResponseDTO> crear(@RequestBody VisitaRequestDTO request) {
         return new ResponseEntity<>(visitaService.crearVisita(request), HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Obtener una visita por su id")
     @GetMapping("/{id}")
     public ResponseEntity<VisitaResponseDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(visitaService.obtenerPorId(id));
     }
 
+    @Operation(summary = "Obtener el historial de visitas de una mascota")
     @GetMapping("/mascota/{idMascota}")
     public ResponseEntity<List<VisitaResponseDTO>> listarPorMascota(@PathVariable Long idMascota) {
         return ResponseEntity.ok(visitaService.listarPorMascota(idMascota));
     }
 
+    @Operation(summary = "Obtener una lista de visitas entre dos fechas")
     @GetMapping("/fechas")
     public ResponseEntity<List<VisitaResponseDTO>> listarPorFechas(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
