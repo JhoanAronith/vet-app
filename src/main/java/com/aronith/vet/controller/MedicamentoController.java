@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.MedicamentoResponseDTO;
 import com.aronith.vet.service.MedicamentoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class MedicamentoController {
 
     @Operation(summary = "Guardar un nuevo medicamento en la base de datos")
     @PostMapping("/guardar")
-    public ResponseEntity<MedicamentoResponseDTO> guardar(@RequestBody MedicamentoRequestDTO dto) {
+    public ResponseEntity<MedicamentoResponseDTO> guardar(@Valid @RequestBody MedicamentoRequestDTO dto) {
         MedicamentoResponseDTO response = medicamentoService.guardar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
