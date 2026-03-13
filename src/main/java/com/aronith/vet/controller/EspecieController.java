@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.EspecieResponseDTO;
 import com.aronith.vet.service.EspecieService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class EspecieController {
 
     @Operation(summary = "Guardar una nueva especie en la base de datos")
     @PostMapping("/guardar")
-    public ResponseEntity<EspecieResponseDTO> guardarEspecie(@RequestBody EspecieRequestDTO dto) {
+    public ResponseEntity<EspecieResponseDTO> guardarEspecie(@Valid @RequestBody EspecieRequestDTO dto) {
         EspecieResponseDTO response = especieService.guardar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
