@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.RecetaResponseDTO;
 import com.aronith.vet.service.RecetaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class RecetaController {
 
     @Operation(summary = "Guardar una nueva receta en la base de datos")
     @PostMapping("/guardar")
-    public ResponseEntity<RecetaResponseDTO> crear(@RequestBody RecetaRequestDTO request) {
+    public ResponseEntity<RecetaResponseDTO> crear(@Valid @RequestBody RecetaRequestDTO request) {
         return new ResponseEntity<>(recetaService.crear(request), HttpStatus.CREATED);
     }
 
