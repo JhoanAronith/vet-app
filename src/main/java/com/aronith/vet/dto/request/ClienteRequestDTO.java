@@ -10,22 +10,27 @@ import jakarta.validation.constraints.Size;
 public record ClienteRequestDTO(
 
         @Schema(description = "Nombre del cliente", example = "Juan Carlos")
-        @NotBlank @Size(min = 2, max = 50)
+        @NotBlank(message = "El nombre es obligatorio")
+        @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
         String nombre,
 
         @Schema(description = "Apellidos del cliente", example = "Pérez García")
-        @NotBlank @Size(min = 2, max = 50)
+        @NotBlank(message = "El apellido es obligatorio")
+        @Size(min = 2, max = 50, message = "El apellido debe tener entre 2 y 50 caracteres")
         String apellido,
 
         @Schema(description = "Documento Nacional de Identidad", example = "70654321")
-        @NotBlank @Size(min = 8, max = 15)
+        @NotBlank(message = "El dni es obligatorio")
+        @Size(min = 8, max = 8, message = "El DNI debe tener 8 caracteres")
         String dni,
 
         @Schema(description = "Número de teléfono de contacto", example = "987654321")
         @Pattern(regexp = "^\\+?[0-9]{9,15}$", message = "Formato de teléfono inválido")
+        @Size(min = 9, max = 9, message = "El teléfono debe tener 9 números")
         String telefono,
 
         @Schema(description = "Correo electrónico de contacto", example = "juan.perez@example.com")
+        @NotBlank(message = "El email es obligatorio")
         @Email
         String email,
 
