@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.UsuarioResponseDTO;
 import com.aronith.vet.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class UsuarioController {
 
     @Operation(summary = "Buscar un usuario por su email")
     @GetMapping("/buscar/{email}")
-    public ResponseEntity<UsuarioResponseDTO> buscarUsuario(@PathVariable String email) {
+    public ResponseEntity<UsuarioResponseDTO> buscarUsuario(@Valid @PathVariable String email) {
         return usuarioService.findByEmail(email)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
