@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.RazaResponseDTO;
 import com.aronith.vet.service.RazaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class RazaController {
 
     @Operation(summary = "Guardar una nueva raza en la base de datos")
     @PostMapping("/guardar")
-    public ResponseEntity<RazaResponseDTO> guardarRaza(@RequestBody RazaRequestDTO dto) {
+    public ResponseEntity<RazaResponseDTO> guardarRaza(@Valid @RequestBody RazaRequestDTO dto) {
         RazaResponseDTO response = razaService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
