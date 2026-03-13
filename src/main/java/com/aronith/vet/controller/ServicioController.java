@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.ServicioResponseDTO;
 import com.aronith.vet.service.ServicioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ServicioController {
 
     @Operation(summary = "Guardar un nuevo servicio en la base de datos")
     @PostMapping("/guardar")
-    public ResponseEntity<ServicioResponseDTO> guardar(@RequestBody ServicioRequestDTO dto) {
+    public ResponseEntity<ServicioResponseDTO> guardar(@Valid @RequestBody ServicioRequestDTO dto) {
         ServicioResponseDTO response = servicioService.guardar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.VisitaResponseDTO;
 import com.aronith.vet.service.VisitaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class VisitaController {
 
     @Operation(summary = "Guardar una visita en la base de datos")
     @PostMapping("/guardar")
-    public ResponseEntity<VisitaResponseDTO> crear(@RequestBody VisitaRequestDTO request) {
+    public ResponseEntity<VisitaResponseDTO> crear(@Valid @RequestBody VisitaRequestDTO request) {
         return new ResponseEntity<>(visitaService.crearVisita(request), HttpStatus.CREATED);
     }
 

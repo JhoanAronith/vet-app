@@ -5,6 +5,7 @@ import com.aronith.vet.dto.response.CitaResponseDTO;
 import com.aronith.vet.service.CitaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class CitaController {
 
     @Operation(summary = "Guardar una nueva cita en la base de datos")
     @PostMapping("/guardar")
-    public ResponseEntity<CitaResponseDTO> guardar(@RequestBody CitaRequestDTO dto) {
+    public ResponseEntity<CitaResponseDTO> guardar(@Valid @RequestBody CitaRequestDTO dto) {
         CitaResponseDTO response = citaService.guardar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
