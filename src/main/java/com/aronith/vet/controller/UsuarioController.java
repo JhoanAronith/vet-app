@@ -26,12 +26,5 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @Operation(summary = "Buscar un usuario por su email")
-    @GetMapping("/buscar/{email}")
-    public ResponseEntity<UsuarioResponseDTO> buscarUsuario(@Valid @PathVariable String email) {
-        return usuarioService.findByEmail(email)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
 
 }
