@@ -25,9 +25,9 @@ public class Usuario implements UserDetails {
     private Long id;
     @Column(nullable = false, unique = true, length = 50)
     private String username;
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 255)
     private String password;
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, unique = true, length = 255)
     private String email;
 
     @Override
@@ -39,7 +39,7 @@ public class Usuario implements UserDetails {
     public String getPassword() { return password; }
 
     @Override
-    public String getUsername() { return username; }
+    public String getUsername() { return this.email; }
 
     @Override
     public boolean isAccountNonExpired() { return true; }

@@ -7,6 +7,7 @@ import com.aronith.vet.model.Usuario;
 import com.aronith.vet.repository.UsuarioRepository;
 import com.aronith.vet.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UsuarioResponseDTO guardar(UsuarioRequestDTO dto) {
@@ -25,20 +27,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setUsername(dto.username());
         usuario.setEmail(dto.email());
-        usuario.setPassword(dto.password());
+        String passwordEncriptada = passwordEncoder.encode(dto.password());
+        usuario.setPassword(passwordEncriptada);
 
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
 
         return mapearADto(usuarioGuardado);
-    }
-
-    @Override
-    public Optional<UsuarioResponseDTO> findByEmail(String email) {
-        return usuarioRepository.findByEmail(email)
-                .map(u -> new UsuarioResponseDTO(
-                        u.username(),
-                        u.email()
-                ));
     }
 
     @Override
