@@ -6,21 +6,20 @@
 
 ## 🚀 Requerimientos Funcionales
 
-El sistema se ha construido bajo una arquitectura de microservicios lógica, cumpliendo con los siguientes puntos atómicos:
+El sistema se ha construido bajo una arquitectura lógica, cumpliendo con los siguientes puntos atómicos:
 
 ### Gestión de Usuarios y Seguridad
-* Registro y autenticación de usuarios del sistema.
-* Control de acceso basado en roles para personal de la clínica.
+* Autenticación de usuarios del sistema.
 
 ### Módulo de Clientes y Mascotas
-* Registro, edición y consulta de propietarios (Clientes).
-* Gestión de pacientes (Mascotas) vinculados a su dueño.
+* Registro y consulta de clientes.
+* Gestión de mascotas vinculadas a su dueño.
 * Clasificación de mascotas por Especie y Raza.
 
 ### Control de Citas Médicas
 * Agendamiento de citas con validación de disponibilidad horaria.
 * Seguimiento de estados de cita (PENDIENTE, COMPLETADA, CANCELADA).
-* Filtrado de citas por fecha específica (Agenda diaria).
+* Filtrado de citas por fecha específica.
 * Consulta de historial de citas por mascota.
 
 ---
@@ -29,11 +28,11 @@ El sistema se ha construido bajo una arquitectura de microservicios lógica, cum
 
 El stack tecnológico seleccionado asegura escalabilidad y facilidad de mantenimiento:
 
-* **Java 17**: Lenguaje principal de desarrollo.
-* **Spring Boot 3**: Framework para la creación de la API REST.
+* **Java 21**: Lenguaje principal de desarrollo.
+* **Spring Boot 3.5.11**: Framework para la creación de la API REST.
 * **Spring Data JPA**: Abstracción para la persistencia de datos.
-* **PostgreSQL / MySQL**: Motor de base de datos relacional.
-* **Lombok**: Biblioteca para reducir el código repetitivo (Boilerplate).
+* **PostgreSQL**: Motor de base de datos relacional.
+* **Lombok**: Biblioteca para reducir el código repetitivo.
 * **Maven**: Gestor de dependencias y construcción del proyecto.
 
 ---
