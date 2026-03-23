@@ -4,10 +4,7 @@ import com.aronith.vet.dto.request.MascotaRequestDTO;
 import com.aronith.vet.dto.response.ClienteResumenDto;
 import com.aronith.vet.dto.response.MascotaResponseDTO;
 import com.aronith.vet.exception.ResourceNotFoundException;
-import com.aronith.vet.model.Cliente;
-import com.aronith.vet.model.Mascota;
-import com.aronith.vet.model.Raza;
-import com.aronith.vet.repository.ClienteRepository;
+import com.aronith.vet.model.*;
 import com.aronith.vet.repository.MascotaRepository;
 import com.aronith.vet.service.impl.MascotaServiceImpl;
 import org.junit.jupiter.api.DisplayName;
@@ -36,14 +33,11 @@ public class MascotaServiceTest {
     @Mock
     private ClienteService clienteService;
 
-    @Mock
-    private ClienteRepository clienteRepository;
-
     @InjectMocks
     private MascotaServiceImpl mascotaService;
 
     @Test
-    @DisplayName("Debe lanzar la excepcion cuando el dueño no existe")
+    @DisplayName("Debe lanzar la excepción cuando el dueño no existe")
     void registroFallidoDuenioNoExiste() {
         MascotaRequestDTO dto = new MascotaRequestDTO("Fido", LocalDate.parse("2023-02-01"), "MACHO", 12, 4L, 200L);
 
@@ -159,7 +153,7 @@ public class MascotaServiceTest {
     }
 
     @Test
-    @DisplayName("Debe devolver una lista vacia")
+    @DisplayName("Debe devolver una lista vacía")
     void listarMascotasVacio() {
         when(mascotaRepository.findAll()).thenReturn(List.of());
         List<MascotaResponseDTO> resultado = mascotaService.listarTodos();
@@ -253,6 +247,15 @@ public class MascotaServiceTest {
 
         assertNotNull(resultado);
         assertEquals("Rex", resultado.getNombre());
+    }
+
+    @Test
+    @DisplayName("Debe devolver una excepción si la mascota no existe")
+    void buscarMascotaPorIdFalla() {
+        when(mascotaRepository.findById(200L)).thenReturn(Optional.empty());
+        assertThrows(RuntimeException.class, () -> {
+            mascotaService.buscarMascotaPorId(200L);
+        });
     }
 
 }
