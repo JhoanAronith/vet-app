@@ -220,4 +220,13 @@ public class MascotaServiceTest {
         assertTrue(resultado.isPresent());
         assertEquals("Jhoan", resultado.get().nombre());
     }
+
+    @Test
+    @DisplayName("Debe devolver un Optional.empty()")
+    void buscarClientePorMascotaNoExiste() {
+        when(mascotaRepository.findById(1L)).thenReturn(Optional.empty());
+        Optional<ClienteResumenDto> resultado = mascotaService.buscarClientePorMascotaId(1L);
+        assertTrue(resultado.isEmpty());
+    }
+
 }
