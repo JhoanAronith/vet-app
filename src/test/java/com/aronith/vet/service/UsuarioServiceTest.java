@@ -12,8 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -78,6 +77,14 @@ public class UsuarioServiceTest {
         when(usuarioRepository.existsByEmail("jhoan@gmail.com")).thenReturn(true);
         Boolean resultado = usuarioService.existsByEmail("jhoan@gmail.com");
         assertTrue(resultado);
+    }
+
+    @Test
+    @DisplayName("Debe retornar false si el email no existe")
+    void emailUsuarioInvalido() {
+        when(usuarioRepository.existsByEmail("jhoan@gmail.com")).thenReturn(false);
+        Boolean resultado = usuarioService.existsByEmail("jhoan@gmail.com");
+        assertFalse(resultado);
     }
 
 }
