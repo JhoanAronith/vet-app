@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -51,5 +52,24 @@ public class UsuarioServiceTest {
         verify(usuarioRepository, times(1)).save(any(Usuario.class));
 
     }
+
+    @Test
+    @DisplayName("Debe devolver una excepcion si el email ya existe")
+    void emailUsuarioExiste() {
+        UsuarioRequestDTO dto = new UsuarioRequestDTO(
+                "jhoan_test",
+                "jhoantest",
+                "jhoan@test.com"
+        );
+
+        when(usuarioRepository.existsByEmail(dto.email())).thenReturn(true);
+
+        assertThrows(RuntimeException.class, () -> {
+            usuarioService.guardar(dto);
+        });
+
+        verify(usuarioRepository, never()).save(any());
+    }
+
 
 }
