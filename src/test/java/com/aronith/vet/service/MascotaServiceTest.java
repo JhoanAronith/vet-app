@@ -108,4 +108,19 @@ public class MascotaServiceTest {
         verify(clienteService, times(1)).obtenerPorId(idDuenio);
     }
 
+    @Test
+    @DisplayName("Debe lanzar una excepción cuando la raza no existe")
+    void registroFallidoRazaNoExiste() {
+        MascotaRequestDTO dto = new MascotaRequestDTO("Fido", LocalDate.parse("2023-02-01"), "MACHO", 12, 10L, 200L);
+
+
+        when(razaService.obtenerPorId(10L)).thenThrow(new ResourceNotFoundException("Raza no encontrada"));
+
+        assertThrows(ResourceNotFoundException.class, () -> {
+            mascotaService.guardar(dto);
+        });
+
+        verify(mascotaRepository, never()).save(any());
+    }
+
 }
