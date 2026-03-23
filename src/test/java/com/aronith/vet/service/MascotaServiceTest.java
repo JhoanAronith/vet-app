@@ -1,6 +1,7 @@
 package com.aronith.vet.service;
 
 import com.aronith.vet.dto.request.MascotaRequestDTO;
+import com.aronith.vet.dto.response.ClienteResumenDto;
 import com.aronith.vet.dto.response.MascotaResponseDTO;
 import com.aronith.vet.exception.ResourceNotFoundException;
 import com.aronith.vet.model.Cliente;
@@ -200,4 +201,23 @@ public class MascotaServiceTest {
         assertTrue(resultado.isEmpty());
     }
 
+    @Test
+    @DisplayName("Debe devolver el dueño de una mascota buscada por su id")
+    void buscarClientePorMascota() {
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Jhoan");
+        cliente.setDni("74640216");
+        cliente.setTelefono("930473294");
+
+        Mascota mascota = new Mascota();
+        mascota.setId(1L);
+        mascota.setCliente(cliente);
+
+        when(mascotaRepository.findById(1L)).thenReturn(Optional.of(mascota));
+
+        Optional<ClienteResumenDto> resultado = mascotaService.buscarClientePorMascotaId(1L);
+
+        assertTrue(resultado.isPresent());
+        assertEquals("Jhoan", resultado.get().nombre());
+    }
 }
