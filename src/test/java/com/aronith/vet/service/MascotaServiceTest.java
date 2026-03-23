@@ -158,4 +158,15 @@ public class MascotaServiceTest {
         verify(mascotaRepository, times(1)).findAll();
     }
 
+    @Test
+    @DisplayName("Debe devolver una lista vacia")
+    void listarMascotasVacio() {
+
+        when(mascotaRepository.findAll()).thenReturn(List.of());
+
+        List<MascotaResponseDTO> resultado = mascotaService.listarTodos();
+
+        assertTrue(resultado.isEmpty());
+    }
+
 }
