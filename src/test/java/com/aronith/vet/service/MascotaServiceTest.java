@@ -10,6 +10,7 @@ import com.aronith.vet.repository.ClienteRepository;
 import com.aronith.vet.repository.MascotaRepository;
 import com.aronith.vet.repository.UsuarioRepository;
 import com.aronith.vet.service.impl.MascotaServiceImpl;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +18,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -121,6 +124,38 @@ public class MascotaServiceTest {
         });
 
         verify(mascotaRepository, never()).save(any());
+    }
+
+    @Test
+    @DisplayName("Debe retornar una lista con mascotas")
+    void listarTodasMascotas() {
+        Raza raza = new Raza();
+        raza.setNombre("Labrador");
+
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Carlos");
+
+        Mascota mascota1 = new Mascota();
+        mascota1.setId(1L);
+        mascota1.setNombre("Rex");
+        mascota1.setRaza(raza);
+        mascota1.setCliente(cliente);
+
+        Mascota mascota2 = new Mascota();
+        mascota2.setId(2L);
+        mascota2.setNombre("Fido");
+        mascota2.setRaza(raza);
+        mascota2.setCliente(cliente);
+
+        List<Mascota> mascotas = List.of(mascota1, mascota2);
+
+        when(mascotaRepository.findAll()).thenReturn(mascotas);
+
+        List<MascotaResponseDTO> resultado = mascotaService.listarTodos();
+
+        assertNotNull(resultado);
+        assertEquals(2, resultado.size());
+        verify(mascotaRepository, times(1)).findAll();
     }
 
 }
