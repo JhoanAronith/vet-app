@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -161,12 +162,34 @@ public class MascotaServiceTest {
     @Test
     @DisplayName("Debe devolver una lista vacia")
     void listarMascotasVacio() {
-
         when(mascotaRepository.findAll()).thenReturn(List.of());
-
         List<MascotaResponseDTO> resultado = mascotaService.listarTodos();
-
         assertTrue(resultado.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Debe devolver una mascota buscada por su nombre")
+    void buscarMascotaPorNombre() {
+        Raza raza = new Raza();
+        raza.setNombre("Labrador");
+
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Carlos");
+
+        Mascota mascota = new Mascota();
+        mascota.setId(1L);
+        mascota.setNombre("Fido");
+        mascota.setRaza(raza);
+        mascota.setCliente(cliente);
+
+        when(mascotaRepository.findByNombre("Fido")).thenReturn(Optional.of(mascota));
+
+        List<MascotaResponseDTO> resultado = mascotaService.buscarPorNombre("Fido");
+
+        assertNotNull(resultado);
+        assertEquals(1, resultado.size());
+        assertEquals("Fido", resultado.get(0).nombre());
+        verify(mascotaRepository, times(1)).findByNombre("Fido");
     }
 
 }
