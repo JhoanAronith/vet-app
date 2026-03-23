@@ -3,6 +3,7 @@ package com.aronith.vet.service.impl;
 import com.aronith.vet.dto.request.MascotaRequestDTO;
 import com.aronith.vet.dto.response.ClienteResumenDto;
 import com.aronith.vet.dto.response.MascotaResponseDTO;
+import com.aronith.vet.exception.ResourceNotFoundException;
 import com.aronith.vet.model.Cliente;
 import com.aronith.vet.model.Mascota;
 import com.aronith.vet.model.Raza;
@@ -74,7 +75,7 @@ public class MascotaServiceImpl implements MascotaService {
     @Override
     public Mascota buscarMascotaPorId(Long id) {
         return mascotaRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Mascota no encontrada"));
+                .orElseThrow(()-> new ResourceNotFoundException("Mascota no encontrada"));
     }
 
     private MascotaResponseDTO mapearADto(Mascota mascota) {
