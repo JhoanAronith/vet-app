@@ -41,6 +41,7 @@ public class UsuarioServiceTest {
         Usuario usuarioEsperado = new Usuario();
         usuarioEsperado.setEmail(dto.email());
 
+        when(usuarioRepository.existsByEmail(dto.email())).thenReturn(false);
         when(passwordEncoder.encode(anyString())).thenReturn("password_encriptada_abc123");
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(usuarioEsperado);
 
