@@ -9,9 +9,7 @@ import com.aronith.vet.model.Mascota;
 import com.aronith.vet.model.Raza;
 import com.aronith.vet.repository.ClienteRepository;
 import com.aronith.vet.repository.MascotaRepository;
-import com.aronith.vet.repository.UsuarioRepository;
 import com.aronith.vet.service.impl.MascotaServiceImpl;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -227,6 +225,34 @@ public class MascotaServiceTest {
         when(mascotaRepository.findById(1L)).thenReturn(Optional.empty());
         Optional<ClienteResumenDto> resultado = mascotaService.buscarClientePorMascotaId(1L);
         assertTrue(resultado.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Debe devolver una mascota buscada por su id")
+    void buscarMascotaPorId() {
+        Raza raza = new Raza();
+        raza.setId(1L);
+        raza.setNombre("Labrador");
+
+        Cliente duenio = new Cliente();
+        duenio.setId(1L);
+        duenio.setNombre("Carlos");
+
+        Mascota mascotaGuardada = new Mascota();
+        mascotaGuardada.setId(1L);
+        mascotaGuardada.setNombre("Rex");
+        mascotaGuardada.setFechaNacimiento(LocalDate.parse("2023-02-01"));
+        mascotaGuardada.setGenero("MACHO");
+        mascotaGuardada.setPesoActual(12);
+        mascotaGuardada.setRaza(raza);
+        mascotaGuardada.setCliente(duenio);
+
+        when(mascotaRepository.findById(1L)).thenReturn(Optional.of(mascotaGuardada));
+
+        Mascota resultado = mascotaService.buscarMascotaPorId(1L);
+
+        assertNotNull(resultado);
+        assertEquals("Rex", resultado.getNombre());
     }
 
 }
