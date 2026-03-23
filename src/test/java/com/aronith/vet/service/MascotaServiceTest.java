@@ -192,4 +192,12 @@ public class MascotaServiceTest {
         verify(mascotaRepository, times(1)).findByNombre("Fido");
     }
 
+    @Test
+    @DisplayName("Debe devolver una mascota buscada por su nombre")
+    void buscarMascotaPorNombreFallido() {
+        when(mascotaRepository.findByNombre("Fido")).thenReturn(Optional.empty());
+        List<MascotaResponseDTO> resultado = mascotaService.buscarPorNombre("Fido");
+        assertTrue(resultado.isEmpty());
+    }
+
 }
