@@ -46,4 +46,30 @@ public class EspecieServiceTest {
         verify(especieRepository, times(1)).save(any(Especie.class));
     }
 
+    @Test
+    @DisplayName("Debe devolver una lista de todas las especies")
+    void listarTodasLasEspecies() {
+        Raza raza1 = new Raza();
+        raza1.setNombre("Labrador");
+
+        Raza raza2 = new Raza();
+        raza2.setNombre("Doberman");
+
+        List<Raza> razas = List.of(raza1, raza2);
+
+        Especie especie = new Especie();
+        especie.setNombre("Canes");
+        especie.setRazas(razas);
+
+        List<Especie> especies = List.of(especie);
+
+        when(especieRepository.findAll()).thenReturn(especies);
+
+        List<EspecieResponseDTO> resultado = especieService.listarTodos();
+
+        assertNotNull(resultado);
+        assertEquals(1, resultado.size());
+        verify(especieRepository, times(1)).findAll();
+    }
+
 }
