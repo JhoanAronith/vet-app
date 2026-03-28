@@ -2,7 +2,6 @@ package com.aronith.vet.service;
 
 import com.aronith.vet.dto.request.EspecieRequestDTO;
 import com.aronith.vet.dto.response.EspecieResponseDTO;
-import com.aronith.vet.dto.response.MascotaResponseDTO;
 import com.aronith.vet.model.*;
 import com.aronith.vet.repository.EspecieRepository;
 import com.aronith.vet.service.impl.EspecieServiceImpl;
