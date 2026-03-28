@@ -104,4 +104,13 @@ public class EspecieServiceTest {
 
     }
 
+    @Test
+    @DisplayName("Debe devolver una excepción si la especie no existe")
+    void buscarEspeciePorIdFalla() {
+        when(especieRepository.findById(1L)).thenReturn(Optional.empty());
+        assertThrows(RuntimeException.class, () -> {
+            especieService.obtenerPorId(1L);
+        });
+    }
+
 }
