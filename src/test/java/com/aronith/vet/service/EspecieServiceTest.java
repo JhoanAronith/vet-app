@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -79,6 +81,27 @@ public class EspecieServiceTest {
         when(especieRepository.findAll()).thenReturn(List.of());
         List<EspecieResponseDTO> resultado = especieService.listarTodos();
         assertTrue(resultado.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Debe devolver una especie buscada por su id")
+    void buscarEspeciePorId() {
+        Raza raza = new Raza();
+        raza.setNombre("Labrador");
+        List<Raza> razas = List.of(raza);
+
+        Especie especie = new Especie();
+        especie.setId(1L);
+        especie.setNombre("Canes");
+        especie.setRazas(razas);
+
+        when(especieRepository.findById(1L)).thenReturn(Optional.of(especie));
+
+        Especie resultado = especieService.obtenerPorId(1L);
+
+        assertNotNull(resultado);
+        assertEquals("Canes", resultado.getNombre());
+
     }
 
 }
