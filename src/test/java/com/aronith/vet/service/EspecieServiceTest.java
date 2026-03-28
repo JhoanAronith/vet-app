@@ -2,6 +2,7 @@ package com.aronith.vet.service;
 
 import com.aronith.vet.dto.request.EspecieRequestDTO;
 import com.aronith.vet.dto.response.EspecieResponseDTO;
+import com.aronith.vet.dto.response.MascotaResponseDTO;
 import com.aronith.vet.model.*;
 import com.aronith.vet.repository.EspecieRepository;
 import com.aronith.vet.service.impl.EspecieServiceImpl;
@@ -70,6 +71,14 @@ public class EspecieServiceTest {
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
         verify(especieRepository, times(1)).findAll();
+    }
+
+    @Test
+    @DisplayName("Debe devolver una lista vacía")
+    void listarEspeciesVacia() {
+        when(especieRepository.findAll()).thenReturn(List.of());
+        List<EspecieResponseDTO> resultado = especieService.listarTodos();
+        assertTrue(resultado.isEmpty());
     }
 
 }
