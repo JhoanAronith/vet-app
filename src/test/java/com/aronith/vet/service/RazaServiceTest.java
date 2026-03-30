@@ -84,4 +84,30 @@ public class RazaServiceTest {
         verify(razaRepository, times(1)).findAll();
     }
 
+    @Test
+    @DisplayName("Debe devolver una lista de mascotas con la misma especie")
+    void buscarMascotasPorEspecie() {
+        Especie especie = new Especie();
+        especie.setId(1L);
+        especie.setNombre("Canes");
+
+        Raza raza1 = new Raza();
+        raza1.setNombre("Labrador");
+        raza1.setEspecie(especie);
+
+        Raza raza2 = new Raza();
+        raza2.setNombre("Chihuahua");
+        raza2.setEspecie(especie);
+
+        List<Raza> razas = List.of(raza1, raza2);
+
+        when(razaRepository.findByEspecieId(1L)).thenReturn(razas);
+
+        List<RazaResponseDTO> resultado = razaService.findByEspecieId(1L);
+
+        assertNotNull(resultado);
+        assertEquals(2, resultado.size());
+        verify(razaRepository, times(1)).findByEspecieId(1L);
+    }
+
 }
