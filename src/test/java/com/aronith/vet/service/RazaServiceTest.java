@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,6 +56,32 @@ public class RazaServiceTest {
         assertNotNull(resultado);
         assertEquals("Doberman", resultado.nombre());
         verify(razaRepository, times(1)).save(any(Raza.class));
+    }
+
+    @Test
+    @DisplayName("Debe devolver una lista con todas las razas")
+    void listarTodasLasRazas() {
+        Especie especie = new Especie();
+        especie.setId(1L);
+        especie.setNombre("Canes");
+
+        Raza raza1 = new Raza();
+        raza1.setNombre("Labrador");
+        raza1.setEspecie(especie);
+
+        Raza raza2 = new Raza();
+        raza2.setNombre("Chihuahua");
+        raza2.setEspecie(especie);
+
+        List<Raza> razas = List.of(raza1, raza2);
+
+        when(razaRepository.findAll()).thenReturn(razas);
+
+        List<RazaResponseDTO> resultado = razaService.findAll();
+
+        assertNotNull(resultado);
+        assertEquals(2, resultado.size());
+        verify(razaRepository, times(1)).findAll();
     }
 
 }
