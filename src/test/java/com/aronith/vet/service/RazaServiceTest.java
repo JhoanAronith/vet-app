@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -109,5 +110,27 @@ public class RazaServiceTest {
         assertEquals(2, resultado.size());
         verify(razaRepository, times(1)).findByEspecieId(1L);
     }
+
+    @Test
+    @DisplayName("Debe devolver una raza por su id")
+    void buscarMascotaPorSuId() {
+        Especie especie = new Especie();
+        especie.setId(1L);
+        especie.setNombre("Canes");
+
+        Raza raza1 = new Raza();
+        raza1.setId(1L);
+        raza1.setNombre("Labrador");
+        raza1.setEspecie(especie);
+
+        when(razaRepository.findById(1L)).thenReturn(Optional.of(raza1));
+
+        Raza resultado = razaService.obtenerPorId(1L);
+
+        assertNotNull(resultado);
+        assertEquals("Labrador", resultado.getNombre());
+        verify(razaRepository, times(1)).findById(1L);
+    }
+
 
 }
