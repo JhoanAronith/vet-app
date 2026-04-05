@@ -1,10 +1,10 @@
-# 🐾 Vet - Sistema de Gestión Veterinaria
+# Vet - Sistema de Gestión Veterinaria
 
 **Vet** es una solución robusta desarrollada con **Spring Boot** diseñada para digitalizar la operación diaria de clínicas veterinarias. El sistema centraliza la gestión de pacientes, propietarios y la agenda de citas, garantizando la integridad de la información y la eficiencia en la atención.
 
 ---
 
-## 🚀 Requerimientos Funcionales
+## Requerimientos Funcionales
 
 El sistema se ha construido bajo una arquitectura lógica, cumpliendo con los siguientes puntos atómicos:
 
@@ -24,7 +24,7 @@ El sistema se ha construido bajo una arquitectura lógica, cumpliendo con los si
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 El stack tecnológico seleccionado asegura escalabilidad y facilidad de mantenimiento:
 
@@ -37,7 +37,7 @@ El stack tecnológico seleccionado asegura escalabilidad y facilidad de mantenim
 
 ---
 
-## ⚙️ Cómo Levantar el Proyecto
+## Cómo Levantar el Proyecto
 
 Sigue estos pasos para ejecutar el sistema en tu entorno local:
 
@@ -63,7 +63,7 @@ Sigue estos pasos para ejecutar el sistema en tu entorno local:
 
 ---
 
-## 👤 Desarrollado por
+## Desarrollado por
 
 Este sistema ha sido diseñado e implementado con dedicación por:
 
